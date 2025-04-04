@@ -3,9 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aadu's Mood Lifter 💖</title>
+  <title>Aadu's Magical Happiness Box 💖</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+    
+    :root {
+      --pink: #ff4d8d;
+      --light-pink: #ff9a9e;
+      --peach: #fad0c4;
+      --blue: #b8e1ff;
+    }
     
     body {
       margin: 0;
@@ -17,10 +24,11 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       text-align: center;
       animation: gradientBG 15s ease infinite;
       overflow: hidden;
+      position: relative;
     }
 
     @keyframes gradientBG {
@@ -30,17 +38,19 @@
     }
 
     h1 {
-      color: #ff4d8d;
-      font-size: 2.8rem;
+      color: var(--pink);
+      font-size: 3rem;
       margin-bottom: 30px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
       font-family: 'Dancing Script', cursive;
       animation: pulse 2s infinite alternate;
+      position: relative;
+      z-index: 5;
     }
 
     @keyframes pulse {
-      from { transform: scale(1); }
-      to { transform: scale(1.05); }
+      from { transform: scale(1); text-shadow: 0 0 5px rgba(255, 77, 141, 0.5); }
+      to { transform: scale(1.05); text-shadow: 0 0 20px rgba(255, 77, 141, 0.8); }
     }
 
     .btn-container {
@@ -49,6 +59,8 @@
       justify-content: center;
       gap: 15px;
       margin-bottom: 20px;
+      position: relative;
+      z-index: 5;
     }
 
     .btn {
@@ -57,7 +69,7 @@
       border: none;
       border-radius: 50px;
       background-color: rgba(255, 255, 255, 0.9);
-      color: #ff4d8d;
+      color: var(--pink);
       cursor: pointer;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
@@ -65,6 +77,7 @@
       overflow: hidden;
       z-index: 1;
       font-weight: 600;
+      backdrop-filter: blur(5px);
     }
 
     .btn:hover {
@@ -80,7 +93,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      background: linear-gradient(45deg, var(--light-pink), var(--peach));
       z-index: -1;
       transform: scaleX(0);
       transform-origin: right;
@@ -93,24 +106,25 @@
     }
 
     .hearts {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       overflow: hidden;
       pointer-events: none;
-      z-index: -1;
+      z-index: 1;
     }
 
     .heart {
       position: absolute;
       width: 20px;
       height: 20px;
-      background-color: #ff6b8b;
+      background-color: var(--pink);
       transform: rotate(45deg);
       animation: float 5s linear infinite;
       opacity: 0.8;
+      filter: drop-shadow(0 0 5px rgba(255, 107, 139, 0.7));
     }
 
     .heart::before, .heart::after {
@@ -118,7 +132,7 @@
       position: absolute;
       width: 20px;
       height: 20px;
-      background-color: #ff6b8b;
+      background-color: inherit;
       border-radius: 50%;
     }
 
@@ -149,34 +163,36 @@
 
     .love-note {
       position: absolute;
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, 0.95);
       padding: 15px 20px;
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       max-width: 250px;
       font-size: 1.1rem;
-      color: #ff4d8d;
+      color: var(--pink);
       font-weight: 500;
       animation: floatNote 8s ease-in-out forwards;
       z-index: 10;
       text-align: center;
       border: 1px solid rgba(255, 107, 139, 0.3);
+      backdrop-filter: blur(3px);
+      transform-origin: center;
     }
 
     @keyframes floatNote {
       0% {
-        transform: translateY(100px) scale(0.8);
+        transform: translateY(100px) scale(0.8) rotate(-5deg);
         opacity: 0;
       }
       20% {
-        transform: translateY(0) scale(1);
+        transform: translateY(0) scale(1) rotate(0deg);
         opacity: 1;
       }
       80% {
         opacity: 1;
       }
       100% {
-        transform: translateY(-100px) scale(0.8);
+        transform: translateY(-100px) scale(0.8) rotate(5deg);
         opacity: 0;
       }
     }
@@ -184,21 +200,24 @@
     .music-note {
       position: absolute;
       font-size: 24px;
-      color: #ff4d8d;
+      color: var(--pink);
       animation: floatMusic 4s linear forwards;
       opacity: 0.7;
+      z-index: 2;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
     }
 
     @keyframes floatMusic {
       0% {
-        transform: translateY(0) rotate(0deg);
+        transform: translateY(0) rotate(0deg) scale(0.5);
         opacity: 0;
       }
       10% {
         opacity: 0.7;
+        transform: translateY(-20px) rotate(10deg) scale(1);
       }
       100% {
-        transform: translateY(-100px) rotate(360deg);
+        transform: translateY(-100px) rotate(360deg) scale(1.5);
         opacity: 0;
       }
     }
@@ -206,6 +225,7 @@
     .title-container {
       margin-bottom: 30px;
       position: relative;
+      z-index: 5;
     }
 
     .title-container::after {
@@ -216,14 +236,20 @@
       transform: translateX(-50%);
       width: 100px;
       height: 3px;
-      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      background: linear-gradient(to right, var(--light-pink), var(--peach));
       border-radius: 3px;
+      animation: linePulse 2s infinite alternate;
+    }
+
+    @keyframes linePulse {
+      from { width: 100px; }
+      to { width: 150px; }
     }
 
     .now-playing {
       margin-top: 20px;
       font-size: 1.2rem;
-      color: #ff4d8d;
+      color: var(--pink);
       background-color: rgba(255, 255, 255, 0.7);
       padding: 10px 20px;
       border-radius: 50px;
@@ -232,17 +258,177 @@
       transform: translateY(20px);
       transition: all 0.5s ease;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      z-index: 5;
     }
 
     .now-playing.show {
       opacity: 1;
       transform: translateY(0);
     }
+
+    .floating-bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(2px);
+      animation: floatBubble 15s infinite linear;
+      z-index: 0;
+    }
+
+    @keyframes floatBubble {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-100px) translateX(50px) rotate(90deg);
+      }
+      50% {
+        transform: translateY(-200px) translateX(0) rotate(180deg);
+      }
+      75% {
+        transform: translateY(-100px) translateX(-50px) rotate(270deg);
+      }
+      100% {
+        transform: translateY(0) translateX(0) rotate(360deg);
+      }
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: white;
+      border-radius: 50%;
+      animation: sparkle 1s infinite alternate;
+      filter: blur(0.5px);
+    }
+
+    @keyframes sparkle {
+      0% { transform: scale(0.3); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .photo-frame {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border: 5px solid white;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      background: url('harry.png') center/cover;
+      animation: floatFrame 8s ease-in-out infinite;
+      opacity: 0.9;
+      z-index: 3;
+    }
+
+    @keyframes floatFrame {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+
+    .polaroid {
+      position: absolute;
+      background: white;
+      padding: 15px 15px 60px 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transform: rotate(-10deg);
+      animation: floatPolaroid 12s ease-in-out infinite;
+      z-index: 3;
+    }
+
+    .polaroid img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      background: #eee;
+    }
+
+    .polaroid:after {
+      content: 'Aadu 💖';
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: var(--pink);
+      font-family: 'Dancing Script', cursive;
+    }
+
+    @keyframes floatPolaroid {
+      0%, 100% { transform: translateY(0) rotate(-10deg); }
+      50% { transform: translateY(-30px) rotate(5deg); }
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: var(--pink);
+      opacity: 0;
+      z-index: 4;
+      animation: confettiFall 5s linear forwards;
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .candle {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+
+    .candle-body {
+      width: 30px;
+      height: 80px;
+      background: linear-gradient(to right, #f5c3e6, #ffb6c1, #f5c3e6);
+      border-radius: 5px 5px 0 0;
+      position: relative;
+    }
+
+    .candle-flame {
+      width: 15px;
+      height: 30px;
+      background: linear-gradient(to top, orange, yellow);
+      border-radius: 50% 50% 20% 20%;
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: flicker 0.5s infinite alternate;
+      box-shadow: 0 0 20px yellow, 0 0 40px orange;
+    }
+
+    @keyframes flicker {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+      50% { transform: translateX(-50%) scale(0.9) translateX(2px); opacity: 0.8; }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .btn {
+        padding: 12px 24px;
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="title-container">
-    <h1>Hey Aadu, here's your happiness box 💕</h1>
+    <h1>Hey Aadu, Your Magical Happiness Box 💖</h1>
   </div>
   
   <div class="btn-container">
@@ -250,6 +436,7 @@
     <button class="btn" onclick="playRandomAudio()">Surprise me! ✨</button>
     <button class="btn" onclick="playRandomAudio()">Cheer me up 💖</button>
     <button class="btn" onclick="pauseAudio()">Pause ⏸️</button>
+    <button class="btn" onclick="createSpecialSurprise()">Special for Aadu 🌟</button>
   </div>
 
   <div class="now-playing" id="nowPlaying"></div>
@@ -288,11 +475,62 @@
       "You make ordinary moments extraordinary, Aadu 🌟",
       "Aadu, I fall for you more each passing day 💘",
       "Your presence is my favorite place to be, Aadu 🏡",
-      "Aadu, you're the dream I never want to wake up from 💭"
+      "Aadu, you're the dream I never want to wake up from 💭",
+      "Aadu, your love is my greatest treasure 💎",
+      "With you, every day is Valentine's Day, Aadu 💝",
+      "Aadu, you're the reason I believe in magic 🔮",
+      "Your eyes tell stories I never want to stop reading, Aadu 👀",
+      "Aadu, you're my favorite notification 📱",
+      "I'd choose you in every lifetime, Aadu ♾️",
+      "Aadu, you're the human equivalent of sunshine ☀️"
     ];
 
     const audio = document.getElementById('audioPlayer');
     const nowPlaying = document.getElementById('nowPlaying');
+
+    // Create initial floating bubbles
+    function createBubbles() {
+      for (let i = 0; i < 10; i++) {
+        const bubble = document.createElement('div');
+        bubble.className = 'floating-bubble';
+        const size = Math.random() * 100 + 50;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.left = `${Math.random() * 100}%`;
+        bubble.style.top = `${Math.random() * 100}%`;
+        bubble.style.animationDuration = `${15 + Math.random() * 20}s`;
+        bubble.style.animationDelay = `${Math.random() * 10}s`;
+        document.body.appendChild(bubble);
+      }
+    }
+
+    // Create initial sparkles
+    function createSparkles() {
+      for (let i = 0; i < 20; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = `${Math.random() * 100}%`;
+        sparkle.style.top = `${Math.random() * 100}%`;
+        sparkle.style.animationDelay = `${Math.random() * 2}s`;
+        document.body.appendChild(sparkle);
+      }
+    }
+
+    // Create floating photo frames
+    function createPhotoFrames() {
+      const frame1 = document.createElement('div');
+      frame1.className = 'photo-frame';
+      frame1.style.left = '10%';
+      frame1.style.top = '20%';
+      document.body.appendChild(frame1);
+
+      const frame2 = document.createElement('div');
+      frame2.className = 'polaroid';
+      frame2.style.right = '10%';
+      frame2.style.top = '30%';
+      frame2.innerHTML = '<img src="Aadu.png" alt="Aadu">';
+      document.body.appendChild(frame2);
+    }
 
     function playRandomAudio() {
       const random = Math.floor(Math.random() * voiceNotes.length);
@@ -304,6 +542,7 @@
           releaseHearts();
           showLoveNote();
           createMusicNotes();
+          createConfetti();
           
           setTimeout(() => {
             nowPlaying.classList.remove('show');
@@ -328,14 +567,14 @@
 
     function releaseHearts() {
       const hearts = document.getElementById('hearts');
-      for (let i = 0; i < 15; i++) {
+      for (let i = 0; i < 20; i++) {
         const heart = document.createElement('div');
         heart.className = 'heart';
         heart.style.left = Math.random() * 100 + 'vw';
         heart.style.animationDuration = 3 + Math.random() * 3 + 's';
         heart.style.background = `hsl(${Math.random() * 60 + 330}, 100%, 75%)`;
         
-        const size = Math.random() * 15 + 10;
+        const size = Math.random() * 20 + 10;
         heart.style.width = `${size}px`;
         heart.style.height = `${size}px`;
         
@@ -349,7 +588,6 @@
       note.className = 'love-note';
       note.textContent = loveNotes[Math.floor(Math.random() * loveNotes.length)];
       
-      // Position the note randomly but ensure it's visible
       note.style.left = `${Math.random() * 60 + 20}%`;
       note.style.top = `${Math.random() * 50 + 25}%`;
       
@@ -358,7 +596,7 @@
     }
 
     function createMusicNotes() {
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 12; i++) {
         const note = document.createElement('div');
         note.className = 'music-note';
         note.innerHTML = '♪';
@@ -366,14 +604,80 @@
         note.style.bottom = '20%';
         note.style.animationDuration = `${3 + Math.random() * 3}s`;
         note.style.fontSize = `${Math.random() * 20 + 16}px`;
+        note.style.color = `hsl(${Math.random() * 60 + 330}, 100%, 70%)`;
         
         document.body.appendChild(note);
         setTimeout(() => note.remove(), 4000);
       }
     }
 
-    // Initial animation
+    function createConfetti() {
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.animationDuration = `${3 + Math.random() * 3}s`;
+        confetti.style.animationDelay = `${Math.random() * 2}s`;
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 75%)`;
+        confetti.style.width = `${Math.random() * 10 + 5}px`;
+        confetti.style.height = `${Math.random() * 10 + 5}px`;
+        
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 5000);
+      }
+    }
+
+    function createSpecialSurprise() {
+      // Create candle
+      const candle = document.createElement('div');
+      candle.className = 'candle';
+      candle.innerHTML = `
+        <div class="candle-flame"></div>
+        <div class="candle-body"></div>
+      `;
+      document.body.appendChild(candle);
+      
+      // Create giant heart
+      const giantHeart = document.createElement('div');
+      giantHeart.className = 'heart';
+      giantHeart.style.width = '100px';
+      giantHeart.style.height = '100px';
+      giantHeart.style.left = '50%';
+      giantHeart.style.top = '50%';
+      giantHeart.style.transform = 'translate(-50%, -50%) rotate(45deg)';
+      giantHeart.style.animation = 'pulse 1s infinite alternate';
+      giantHeart.style.zIndex = '10';
+      document.body.appendChild(giantHeart);
+      
+      // Show special message
+      const specialNote = document.createElement('div');
+      specialNote.className = 'love-note';
+      specialNote.textContent = "Aadu, you're the most special person in my life! 💖";
+      specialNote.style.left = '50%';
+      specialNote.style.top = '60%';
+      specialNote.style.transform = 'translateX(-50%)';
+      specialNote.style.fontSize = '1.5rem';
+      specialNote.style.animationDuration = '10s';
+      document.body.appendChild(specialNote);
+      
+      // Extra confetti
+      createConfetti();
+      createConfetti();
+      
+      // Remove elements after animation
+      setTimeout(() => {
+        candle.remove();
+        giantHeart.remove();
+        specialNote.remove();
+      }, 10000);
+    }
+
+    // Initial animations when page loads
     window.onload = function() {
+      createBubbles();
+      createSparkles();
+      createPhotoFrames();
+      
       setTimeout(() => {
         const welcomeNote = document.createElement('div');
         welcomeNote.className = 'love-note';
@@ -382,11 +686,25 @@
         welcomeNote.style.top = '70%';
         welcomeNote.style.transform = 'translateX(-50%)';
         welcomeNote.style.animationDuration = '6s';
+        welcomeNote.style.fontSize = '1.3rem';
         
         document.body.appendChild(welcomeNote);
         setTimeout(() => welcomeNote.remove(), 6000);
+        
+        // Initial gentle hearts
+        releaseHearts();
       }, 1000);
     };
+
+    // Continuous gentle animations
+    setInterval(() => {
+      if (Math.random() > 0.7) {
+        createMusicNotes();
+      }
+      if (Math.random() > 0.8) {
+        showLoveNote();
+      }
+    }, 5000);
   </script>
 </body>
 </html>
